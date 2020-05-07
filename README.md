@@ -4,6 +4,6 @@ PERSONAL EXPENSES APP
 
 ## Getting Started
 
-This project is tracking weekly personal expenses built for Android and IOS using Flutter.
-My First App using Flutter, in which I will learn flutter step by step and add to it more and
+This project is for tracking weekly personal expenses, built for Android and IOS using Flutter.
+My First step in learning Flutter journey, in which I will learn flutter and add to it more and
 more features as I learn.
