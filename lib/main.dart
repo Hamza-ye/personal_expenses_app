@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './Transaction.dart';
-import 'package:intl/intl.dart';
+import 'package:personalexpensesapp/wedgits/UserTransactions.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,22 +28,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-        id: '001', title: 'New Shoes', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: 't1',
-        title: 'Weekly Groceries',
-        amount: 16.35,
-        date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'New Shoes 2', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: 't3', title: 'New Shoes 3', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: 't4', title: 'New Shoes 4', amount: 69.99, date: DateTime.now()),
-  ];
-
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,45 +45,7 @@ class MyHomePage extends StatelessWidget {
               child: Text('Chart card'),
             ),
           ),
-          Column(
-            children: transactions.map((tx) {
-              return Card(
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      child: Text(
-                        '\$${tx.amount}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                        ),
-                      ),
-                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 2)),
-                      padding: EdgeInsets.all(10),
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text(
-                          tx.title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          DateFormat().format(tx.date),
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                    )
-                  ],
-                ),
-              );
-            }).toList(),
-          )
+          UserTransactions(),
         ],
       ),
     );
