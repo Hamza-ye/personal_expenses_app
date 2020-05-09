@@ -25,6 +25,13 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.green,
+        textTheme: ThemeData.light().textTheme.copyWith(
+          title: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+          button: TextStyle(color: Colors.white,),
+        )
       ),
       home: MyHomePage(),
     );
@@ -68,11 +75,11 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void _addNewTransaction(String axTitle, double axAmount) {
+  void _addNewTransaction(String axTitle, double axAmount, DateTime date) {
     final newTx = Transaction(
         title: axTitle,
         amount: axAmount,
-        date: DateTime.now(),
+        date: date,
         id: DateTime.now().toString());
     setState(() {
       _userTransactions.add(newTx);

@@ -27,7 +27,8 @@ class TransactionList extends StatelessWidget{
                     ),
                   ),
                 ),
-                title: Text('${transactions[index].title}'),
+                title: Text('${transactions[index].title}',
+                  style: Theme.of(context).textTheme.title,),
                 subtitle: Text(DateFormat.yMMMd().format(transactions[index].date)),
               ),
             );
