@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:personalexpensesapp/wedgits/Chart.dart';
 import 'package:personalexpensesapp/wedgits/NewTransaction.dart';
 import 'package:personalexpensesapp/wedgits/TransactionList.dart';
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Personal Expenses',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: MyHomePage(),
     );
@@ -37,18 +38,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: '001', title: 'New Shoes', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: '002', title: 'New Shoes1', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: '003', title: 'New Shoes2', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: '004', title: 'New Shoes3', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: '005', title: 'New Shoes4', amount: 69.99, date: DateTime.now()),
+//    Transaction(
+//        id: '001', title: 'New Shoes', amount: 10.00, date: DateTime.now()),
+//    Transaction(
+//        id: '002', title: 'Groceries', amount: 30.00, date: DateTime.now()),
+//    Transaction(
+//        id: '003', title: 'Taxi', amount: 9.11, date: DateTime.now()),
+//    Transaction(
+//        id: '004', title: 'New Shirt', amount: 10.00, date: DateTime.now()),
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+          DateTime.now().subtract(
+            Duration(days: 7),)
+      );
+    }).toList();
+  }
   void startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
@@ -76,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
+        title: Text('Personal Expenses'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -88,10 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           Container(
             width: double.infinity,
-            color: Colors.cyanAccent,
-            child: Card(
-              child: Text('Chart card'),
-            ),
+            color: Theme.of(context).primaryColor,
+            child: Chart(_recentTransactions),
           ),
           TransactionList(_userTransactions),
         ],
